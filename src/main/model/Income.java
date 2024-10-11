@@ -17,7 +17,7 @@ public class Income {
      */
     public Income(double amount, String source, LocalDate date) {
         this.amount = amount;
-        this.source= source;
+        this.source = source;
         this.date = date;
     }
     
