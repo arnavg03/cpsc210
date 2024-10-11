@@ -2,7 +2,6 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
@@ -21,7 +20,7 @@ public class BudgetTest {
         Budget budget = new Budget();
         Income income = new Income(500, "Salary", LocalDate.now());
         budget.addIncome(income);
-        // Verify that income is added successfully (tests for other methods will follow a similar pattern)
+        // Verify that income is added successfully
     }
 
     @Test
