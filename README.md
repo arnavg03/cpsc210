@@ -12,3 +12,5 @@ This project interests me because personal finance management is something me an
 - As a user, I want to be able to view the list of expenses in my finance tracker
 - As a user, I want to be able to see a summary of my expenses by category
 - As a user, I want to be able to add an income source to my finance tracker
+- As a user, I want to be able to save my budget to a file.
+- As a user, I want to be able to load a budget file to keep adding on to.

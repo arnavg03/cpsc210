@@ -1,18 +1,26 @@
 package ui;
 
 import model.*;
+import persistence.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class FinanceApp {
+    private static final String JSON_STORE = "./ProjectStarter/data/budget.json";
     private Budget budget;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     /*
      * EFFECTS: runs the finance application
      */
     public FinanceApp() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFinance();
     }
 
@@ -31,7 +39,7 @@ public class FinanceApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("e")) {
+            if (command.equals("g")) {
                 running = false;
             } else {
                 processCommand(command);
@@ -58,7 +66,10 @@ public class FinanceApp {
         System.out.println("\tb -> add income");
         System.out.println("\tc -> view expenses");
         System.out.println("\td -> view summary by category");
-        System.out.println("\te -> quit");
+        System.out.println("\te -> save budget to file");
+        System.out.println("\tf -> load budget from file");
+        System.out.println("\tg -> quit");
+        System.out.println(System.getProperty("user.dir"));
     }
 
     /*
@@ -74,6 +85,10 @@ public class FinanceApp {
             viewExpenses();
         } else if (command.equals("d")) {
             viewSummary();
+        } else if (command.equals("e")) {
+            saveBudget();
+        } else if (command.equals("f")) {
+            loadBudget();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -130,5 +145,32 @@ public class FinanceApp {
         String category = input.next();
         double total = budget.getTotalByCategory(category);
         System.out.println("Total expenses for " + category + ": " + total);
+    }
+
+    /*
+     * EFFECTS: saves the current budget to a JSON file
+     */
+    private void saveBudget() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(budget);
+            jsonWriter.close();
+            System.out.println("Saved budget to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: loads the budget from a JSON file
+     */
+    private void loadBudget() {
+        try {
+            budget = jsonReader.read();
+            System.out.println("Loaded budget from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

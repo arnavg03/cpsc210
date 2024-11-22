@@ -2,8 +2,11 @@ package model;
 
 import java.time.LocalDate;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents Income having an amount (In dollars), source and date.
-public class Income {
+public class Income implements Writable {
     private double amount;
     private String source;
     private LocalDate date;
@@ -44,4 +47,12 @@ public class Income {
         return date;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("source", source);
+        json.put("date", date.toString());
+        return json;
+    }
 }

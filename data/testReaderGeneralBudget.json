@@ -1,0 +1,18 @@
+{
+    "expenses": [
+      {
+        "amount": 100,
+        "category": "Food",
+        "date": "2024-11-21",
+        "description": "Lunch"
+      }
+    ],
+    "incomes": [
+      {
+        "amount": 500,
+        "source": "Job",
+        "date": "2024-11-21"
+      }
+    ]
+  }
+  

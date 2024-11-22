@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents the user's entire budget, including expenses and income sources.
-public class Budget {
+public class Budget implements Writable {
     private List<Expense> expenses;
     private List<Income> incomes;
 
@@ -60,5 +64,42 @@ public class Budget {
             }
         }
         return total;
+    }
+
+    /*
+     * EFFECTS: Returns this budget as a JSON object
+     */
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("expenses", expensesToJson());
+        json.put("incomes", incomesToJson());
+        return json;
+    }
+
+    /*
+     * EFFECTS: Returns expenses as a JSON array
+     */
+    private JSONArray expensesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Expense e : expenses) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    /*
+     * EFFECTS: Returns incomes as a JSON array
+     */
+    private JSONArray incomesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Income i : incomes) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
     }
 }
