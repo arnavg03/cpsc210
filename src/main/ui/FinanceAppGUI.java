@@ -145,44 +145,61 @@ public class FinanceAppGUI extends JFrame {
 
     /**
      * MODIFIES: g
-     * EFFECTS: draws a pie chart representing expense distribution with labels
+     * EFFECTS: draws a pie chart representing the expense distribution by category
+     *          with labeled segments, using random colors for each category. If no
+     *          expenses are available, displays a "No data to display" message.
      */
     private void drawPieChart(Graphics g) {
         if (budget.getExpenses().isEmpty()) {
             g.drawString("No data to display", 150, 150);
             return;
         }
-
+    
         Map<String, Double> categoryTotals = new HashMap<>();
         double total = 0;
-
+    
         for (Expense e : budget.getExpenses()) {
-            categoryTotals.put(e.getCategory(),
-                    categoryTotals.getOrDefault(e.getCategory(), 0.0) + e.getAmount());
-            total += e.getAmount();
+            String category = e.getCategory();
+            double amount = e.getAmount();
+            categoryTotals.put(category, categoryTotals.getOrDefault(category, 0.0) + amount);
+            total += amount;
         }
-
+    
         int startAngle = 0;
-        int x = 100, y = 75, width = 300, height = 300;
-
+    
         for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-            String category = entry.getKey();
             double value = entry.getValue();
-
+            String category = entry.getKey();
             int arcAngle = (int) Math.round((value / total) * 360);
+    
             g.setColor(getRandomColor());
-            g.fillArc(x, y, width, height, startAngle, arcAngle);
-
-            double angle = Math.toRadians(startAngle + arcAngle / 2.0);
-            int labelX = x + width / 2 + (int) (Math.cos(angle) * width / 2.5);
-            int labelY = y + height / 2 - (int) (Math.sin(angle) * height / 2.5);
-
-            g.setColor(Color.BLACK);
-            g.drawString(category, labelX, labelY);
-
+            g.fillArc(100, 75, 300, 300, startAngle, arcAngle);
+    
+            drawLabel(g, category, startAngle, arcAngle);
+    
             startAngle += arcAngle;
         }
     }
+    
+    /**
+     * MODIFIES: g
+     * EFFECTS: draws the label for the pie chart segment
+     */
+    private void drawLabel(Graphics g, String category, int startAngle, int arcAngle) {
+        double angle = Math.toRadians(startAngle + arcAngle / 2.0);
+
+        int x = 100;
+        int y = 75;
+        int width = 300;
+        int height = 300;
+
+        int labelX = x + width / 2 + (int) (Math.cos(angle) * width / 2.5);
+        int labelY = y + height / 2 - (int) (Math.sin(angle) * height / 2.5);
+    
+        g.setColor(Color.BLACK);
+        g.drawString(category, labelX, labelY);
+    }
+    
 
     /**
      * EFFECTS: generates and returns a random color
