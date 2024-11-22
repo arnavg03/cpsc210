@@ -14,3 +14,36 @@ This project interests me because personal finance management is something me an
 - As a user, I want to be able to add an income source to my finance tracker
 - As a user, I want to be able to save my budget to a file.
 - As a user, I want to be able to load a budget file to keep adding on to.
+- As a user, I want to be able to add multiple expenses and incomes to Budget.
+- As a user, I want to be able to save and load the state of my application.
+
+## Instructions for End User
+
+- **Add Expenses**:
+  - Click the "Add Expense" button under the "Expenses" panel.
+  - Enter the details (amount, category, and description) in the prompted dialogs.
+  - The new expense will appear in the list and update the visualization.
+
+- **Filter Expenses**:
+  - Click the "Filter Expenses" button under the "Expenses" panel.
+  - Enter a category to filter the expense list and visualization.
+
+- **Add Income**:
+  - Click the "Add Income" button under the "Incomes" panel.
+  - Enter the details (amount and source) in the prompted dialogs.
+  - The new income will appear in the list.
+
+- **Filter Income**:
+  - Click the "Filter Incomes" button under the "Incomes" panel.
+  - Enter a source to filter the income list.
+
+- **Save the Budget**:
+  - Click the "Save" button at the bottom of the application.
+  - The current budget will be saved to a file.
+
+- **Load the Budget**:
+  - Click the "Load" button at the bottom of the application.
+  - The saved budget will be loaded, and all data will update in the application.
+
+- **Visualization**:
+  - The pie chart in the "Visualization" panel dynamically displays the expense distribution by category.
