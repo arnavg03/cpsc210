@@ -1,11 +1,11 @@
 {
     "incomes": [{
-        "date": "2024-11-21",
+        "date": "2024-11-25",
         "amount": 500,
         "source": "Job"
     }],
     "expenses": [{
-        "date": "2024-11-21",
+        "date": "2024-11-25",
         "amount": 100,
         "description": "Lunch",
         "category": "Food"
