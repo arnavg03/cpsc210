@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Budget;
-import model.Expense;
-import model.Income;
+import model.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

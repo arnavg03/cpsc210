@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class FinanceApp {
-    private static final String JSON_STORE = "./ProjectStarter/data/budget.json";
+    private static final String JSON_STORE = "./data/budget.json";
     private Budget budget;
     private Scanner input;
     private JsonWriter jsonWriter;

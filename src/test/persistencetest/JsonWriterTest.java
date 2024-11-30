@@ -17,7 +17,7 @@ class JsonWriterTest extends JsonTest {
     public void testWriterInvalidFile() {
         try {
             Budget budget = new Budget();
-            JsonWriter writer = new JsonWriter("./ProjectStarter/data/my\0illegal:fileName.json");
+            JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
         } catch (IOException e) {
@@ -29,12 +29,12 @@ class JsonWriterTest extends JsonTest {
     public void testWriterEmptyBudget() {
         try {
             Budget budget = new Budget();
-            JsonWriter writer = new JsonWriter("./ProjectStarter/data/testWriterEmptyBudget.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyBudget.json");
             writer.open();
             writer.write(budget);
             writer.close();
 
-            JsonReader reader = new JsonReader("./ProjectStarter/data/testWriterEmptyBudget.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyBudget.json");
             budget = reader.read();
             assertEquals(0, budget.getExpenses().size());
             assertEquals(0, budget.getIncomes().size());
@@ -49,12 +49,12 @@ class JsonWriterTest extends JsonTest {
             Budget budget = new Budget();
             budget.addExpense(new Expense(100, "Food", java.time.LocalDate.now(), "Lunch"));
             budget.addIncome(new Income(500, "Job", java.time.LocalDate.now()));
-            JsonWriter writer = new JsonWriter("./ProjectStarter/data/testWriterGeneralBudget.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralBudget.json");
             writer.open();
             writer.write(budget);
             writer.close();
 
-            JsonReader reader = new JsonReader("./ProjectStarter/data/testWriterGeneralBudget.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralBudget.json");
             budget = reader.read();
             assertEquals(1, budget.getExpenses().size());
             assertEquals(1, budget.getIncomes().size());

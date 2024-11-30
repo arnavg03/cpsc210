@@ -13,7 +13,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderNonExistentFile() {
-        JsonReader reader = new JsonReader("./ProjectStarter/data/noSuchFile.json");
+        JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
             Budget budget = reader.read();
             fail("IOException expected");
@@ -24,7 +24,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyBudget() {
-        JsonReader reader = new JsonReader("./ProjectStarter/data/testReaderEmptyBudget.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyBudget.json");
         try {
             Budget budget = reader.read();
             assertEquals(0, budget.getExpenses().size());
@@ -36,7 +36,7 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralBudget() {
-        JsonReader reader = new JsonReader("./ProjectStarter/data/testReaderGeneralBudget.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneralBudget.json");
         try {
             Budget budget = reader.read();
             assertEquals(1, budget.getExpenses().size());

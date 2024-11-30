@@ -7,12 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 /**
  * Represents the GUI for the Finance Application.
  */
 public class FinanceAppGUI extends JFrame {
-    private static final String JSON_STORE = "./ProjectStarter/data/budget.json";
+    private static final String JSON_STORE = "./data/budget.json";
     private Budget budget;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -152,6 +153,7 @@ public class FinanceAppGUI extends JFrame {
     private void drawPieChart(Graphics g) {
         if (budget.getExpenses().isEmpty()) {
             g.drawString("No data to display", 150, 150);
+
             return;
         }
     
@@ -231,10 +233,9 @@ public class FinanceAppGUI extends JFrame {
     private void refreshExpenseList() {
         expenseListModel.clear();
         for (Expense e : budget.getExpenses()) {
-            expenseListModel.addElement("Amount: " + e.getAmount() + ", Category: " + e.getCategory()
-                    + ", Desc: " + e.getDescription());
+            expenseListModel.addElement("Amount: " + e.getAmount() + ", Category: " + e.getCategory());
         }
-    }
+    }    
 
     /**
      * MODIFIES: this, budget
@@ -265,11 +266,10 @@ public class FinanceAppGUI extends JFrame {
      */
     private void filterExpenses() {
         String category = JOptionPane.showInputDialog(this, "Enter category to filter by:");
+        List<Expense> filtered = budget.filterExpenses(category);
         expenseListModel.clear();
-        for (Expense e : budget.getExpenses()) {
-            if (e.getCategory().equalsIgnoreCase(category)) {
-                expenseListModel.addElement("Amount: " + e.getAmount() + ", Category: " + e.getCategory());
-            }
+        for (Expense e : filtered) {
+            expenseListModel.addElement("Amount: " + e.getAmount() + ", Category: " + e.getCategory());
         }
     }
 
@@ -279,11 +279,10 @@ public class FinanceAppGUI extends JFrame {
      */
     private void filterIncomes() {
         String source = JOptionPane.showInputDialog(this, "Enter source to filter by:");
+        List<Income> filtered = budget.filterIncomes(source);
         incomeListModel.clear();
-        for (Income i : budget.getIncomes()) {
-            if (i.getSource().equalsIgnoreCase(source)) {
-                incomeListModel.addElement("Amount: " + i.getAmount() + ", Source: " + i.getSource());
-            }
+        for (Income i : filtered) {
+            incomeListModel.addElement("Amount: " + i.getAmount() + ", Source: " + i.getSource());
         }
     }
 
@@ -296,6 +295,7 @@ public class FinanceAppGUI extends JFrame {
             jsonWriter.open();
             jsonWriter.write(budget);
             jsonWriter.close();
+            budget.saveBudget();
             JOptionPane.showMessageDialog(this, "Budget saved successfully!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Failed to save budget.");
@@ -309,6 +309,7 @@ public class FinanceAppGUI extends JFrame {
     private void loadBudget() {
         try {
             budget = jsonReader.read();
+            budget.loadBudget();    
             refreshExpenseList();
             refreshIncomeList();
             chartPanel.repaint();

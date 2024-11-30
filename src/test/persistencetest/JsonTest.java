@@ -6,7 +6,7 @@ import model.Income;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonTest {
-    protected void checkExpense(double amount, String category, String description, Expense expense) {
+    public void checkExpense(double amount, String category, String description, Expense expense) {
         assertEquals(amount, expense.getAmount());
         assertEquals(category, expense.getCategory());
         assertEquals(description, expense.getDescription());

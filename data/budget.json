@@ -1,9 +1,39 @@
 {
-    "incomes": [],
-    "expenses": [{
-        "date": "2024-11-20",
-        "amount": 100,
-        "description": "nothing",
-        "category": "nothing"
-    }]
+    "incomes": [
+        {
+            "date": "2024-11-29",
+            "amount": 1000,
+            "source": "ubc"
+        },
+        {
+            "date": "2024-11-29",
+            "amount": 100,
+            "source": "job"
+        },
+        {
+            "date": "2024-11-29",
+            "amount": 100,
+            "source": "job"
+        }
+    ],
+    "expenses": [
+        {
+            "date": "2024-11-29",
+            "amount": 100,
+            "description": "burger",
+            "category": "food"
+        },
+        {
+            "date": "2024-11-29",
+            "amount": 50,
+            "description": "fries",
+            "category": "food"
+        },
+        {
+            "date": "2024-11-29",
+            "amount": 20,
+            "description": "water",
+            "category": "drink"
+        }
+    ]
 }
