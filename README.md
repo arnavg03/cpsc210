@@ -88,3 +88,16 @@ Added income from source: job of amount 100.0
 Fri Nov 29 15:56:22 PST 2024
 Budget loaded from file.
 ```
+
+### Phase 4: Task 3
+
+#### Reflection on the UML Class Diagram
+
+The UML class diagram provides a comprehensive overview of the structure of the **Personal Finance Tracker** application. It captures the relationships between the core classes (`Budget`, `Expense`, `Income`, `Event`, `EventLog`) and the supporting classes (`JsonReader`, `JsonWriter`, `FinanceApp`, `FinanceAppGUI`). The use of an interface (`Writable`) for `Expense` and `Income` ensures flexibility for potential future extensions, allowing other components to implement this interface. The aggregation relationships between `Budget` and its associated classes (`Expense`, `Income`, `EventLog`) effectively demonstrate how data is managed and tracked within the application.
+
+If I had more time to work on this project, I would consider the following refactoring changes:
+1. **Improve Separation of Concerns**: While the `FinanceAppGUI` class handles user interactions, some logic overlaps with the `Budget` class. To improve cohesion and maintainability, I would extract some of this logic into dedicated controller classes that act as intermediaries between the UI and the model layer.
+2. **Refactor the Singleton `EventLog`**: Although the singleton pattern ensures a single instance, it may limit testability and flexibility. Refactoring `EventLog` to be dependency-injected into components would improve test coverage and decouple components more effectively.
+3. **Enhance Abstraction and Reusability**: The `Writable` interface could be expanded or generalized to include more abstract operations beyond `toJson()` to accommodate additional persistence strategies in the future, such as database or XML storage.
+
+These changes would make the application more modular, easier to test, and more extensible while maintaining the current functionality. The tradeoff is the added complexity, which would need to be justified based on the application's future scope.
